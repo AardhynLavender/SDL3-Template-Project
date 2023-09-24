@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.22)
 project(SDL3-Template-Project)
 
 set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_SUPPRESS_REGENERATION true) # disable ZERO_CHECK target creation
 
 include_directories(include)
 link_directories(lib)

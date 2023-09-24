@@ -2,6 +2,20 @@
 /include/SDL3/
 /lib/
 
-/.idea
+/CMakeFiles
+CMakeCache.txt
 
 /.DS_Store
+
+# CLion
+/.idea
+
+# Visual Studio
+.vs
+*.vcxproj*
+*.proj*
+*.sln
+*.cmake
+*.dir
+/Debug
+/Release
