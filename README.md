@@ -34,4 +34,4 @@ run `cmake .` to generate the Visual Studio project
 
 #### CLion
 
-Open the directory as a Clion project. You'll be prompted to create your *Build Configuration* apon opening.
+Open the directory as a Clion project. You'll be prompted to create your *Build Configuration* upon opening.
