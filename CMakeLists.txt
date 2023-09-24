@@ -8,8 +8,8 @@ link_directories(lib)
 
 add_executable(SDL3-Template-Project src/main.cpp)
 
-if (APPLE)
+if(APPLE)
     target_link_libraries(SDL3-Template-Project libSDL3.dylib)
 elseif(WIN32)
-    # handle windows linking
+    target_link_libraries(SDL3-Template-Project SDL3.lib)
 endif()
