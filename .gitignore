@@ -1,0 +1,7 @@
+/cmake-build-debug/
+/include/SDL3/
+/lib/
+
+/.idea
+
+/.DS_Store
