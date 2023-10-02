@@ -12,7 +12,7 @@ Make directories `/include`, and `/lib` in the root of this repository.
 
 I'm not a fan of linking with system installations of libraries and frameworks. Want to use a system installation... make a *PR*.
 
-Copy the `include/SDL3` directory from your local **SDL3** repository into `/include`;
+Copy the `include/SDL3` directory from your local **SDL3** repository into `/include`
 
 #### MacOS
 
