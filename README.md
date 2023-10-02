@@ -1,6 +1,6 @@
 # SDL3 Template Project
 
-A barebones OS and IDE agnostic C++23 SDL3 CMake project to start your dream game from.
+A barebones OS and IDE agnostic C++23 SDL3 CMake project to start your dream software project from.
 
 ## Setup   
 
