@@ -1,36 +1,31 @@
 #define SDL_MAIN_HANDLED
+
 #include <iostream>
-#include <SDL3/SDL.h>
+#include <renderer.h>
 
-auto handleError(auto errCode) {
-    std::cout << SDL_GetError() << std::endl;
-    return errCode;
-}
+constexpr int WIN_WIDTH = 100, WIN_HEIGHT = 100;
 
-constexpr int WIN_WIDTH = 800, WIN_HEIGHT = 600;
-
-constexpr auto SHAPE_SIZE = 16.0f;
-constexpr auto SHAPE_START_X = (float)WIN_WIDTH / 2 - SHAPE_SIZE / 2,
-               SHAPE_START_Y = (float)WIN_HEIGHT / 2 - SHAPE_SIZE / 2;
+constexpr auto SHAPE_SIZE = 16;
+constexpr int SHAPE_START_X = (float) WIN_WIDTH / 2 - SHAPE_SIZE / 2,
+        SHAPE_START_Y = (float) WIN_HEIGHT / 2 - SHAPE_SIZE / 2;
 
 constexpr auto SPEED = 2.0f;
 
 int main() {
-    handleError(SDL_Init(SDL_INIT_EVERYTHING));
-    auto window = handleError(SDL_CreateWindow("SDL3 Template Project", WIN_WIDTH, WIN_HEIGHT, 0));
-    auto renderer = handleError(SDL_CreateRenderer(window, NULL, 0));
+    handleSDLError(SDL_Init(SDL_INIT_EVERYTHING));
+
+    Window window{"SDL3 Template Project", Window::centered, {WIN_WIDTH, WIN_HEIGHT}, {.opengl = true,}};
+    Renderer renderer{window, {.accelerated = true, .vsync = true,}};
 
     auto x = SHAPE_START_X, y = SHAPE_START_Y;
 
     SDL_Event event;
     bool running = true;
-    while (running) {
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
 
-        SDL_FRect rect{ x, y, SHAPE_SIZE, SHAPE_SIZE };
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-        SDL_RenderRect(renderer, &rect);
+    while (running) {
+        renderer.Clear();
+        renderer.DrawRect({{x,          y},
+                           {SHAPE_SIZE, SHAPE_SIZE}}, Colors::white, Colors::transparent);
 
         while (SDL_PollEvent(&event))
             switch (event.type) {
@@ -59,13 +54,8 @@ int main() {
                     break;
             }
 
-        SDL_RenderPresent(renderer);
+        renderer.Present();
     }
-
-
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
 
     return EXIT_SUCCESS;
 }
