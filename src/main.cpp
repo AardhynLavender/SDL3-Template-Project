@@ -2,60 +2,41 @@
 
 #include <iostream>
 #include <renderer.h>
+#include <input.h>
 
-constexpr int WIN_WIDTH = 100, WIN_HEIGHT = 100;
-
-constexpr auto SHAPE_SIZE = 16;
-constexpr int SHAPE_START_X = (float) WIN_WIDTH / 2 - SHAPE_SIZE / 2, SHAPE_START_Y =
-		  (float) WIN_HEIGHT / 2 - SHAPE_SIZE / 2;
-
-constexpr auto SPEED = 2.0f;
+constexpr int WIN_WIDTH = 800, WIN_HEIGHT = 600;
+constexpr auto SPEED = 0.2f;
 
 int main() {
 	handleSDLError(SDL_Init(SDL_INIT_EVERYTHING));
 
 	Window window{ "SDL3 Template Project", { WIN_WIDTH, WIN_HEIGHT }, { .opengl = true, }};
 	Renderer renderer{ window, { .accelerated = true, .vsync = true, }};
+	Input input{ };
 
-	auto x = SHAPE_START_X, y = SHAPE_START_Y;
+	Vec2<float> pos{ (float) WIN_WIDTH / 2, (float) WIN_HEIGHT / 2 };
+	Rec2<float> rect{ pos, { 50, 50 }};
 
-	SDL_Event event;
-	bool running = true;
+	while (1) {
+		input.update();
+		if (input.getQuit())
+			break; // quit
 
-	while (running) {
+		if (input.getKey(SDLK_w))
+			rect.position.y -= SPEED;
+		if (input.getKey(SDLK_s))
+			rect.position.y += SPEED;
+		if (input.getKey(SDLK_a))
+			rect.position.x -= SPEED;
+		if (input.getKey(SDLK_d))
+			rect.position.x += SPEED;
+
 		renderer.Clear();
-
-		renderer.DrawRect({{ x, y }, { SHAPE_SIZE, SHAPE_SIZE }}, Colors::white, Colors::transparent);
-
-		while (SDL_PollEvent(&event))
-			switch (event.type) {
-				case SDL_EVENT_QUIT:
-					running = false;
-					break;
-				case SDL_EVENT_KEY_DOWN:
-					switch (event.key.keysym.sym) {
-						case SDL_KeyCode::SDLK_RIGHT:
-						case SDL_KeyCode::SDLK_a:
-							x += -SPEED;
-							break;
-						case SDL_KeyCode::SDLK_LEFT:
-						case SDL_KeyCode::SDLK_d:
-							x += SPEED;
-							break;
-						case SDL_KeyCode::SDLK_UP:
-						case SDL_KeyCode::SDLK_w:
-							y += -SPEED;
-							break;
-						case SDL_KeyCode::SDLK_DOWN:
-						case SDL_KeyCode::SDLK_s:
-							y += SPEED;
-							break;
-					}
-					break;
-			}
-
+		renderer.DrawRect(rect, Colors::white, Colors::transparent);
 		renderer.Present();
 	}
+
+	SDL_Quit();
 
 	return EXIT_SUCCESS;
 }
