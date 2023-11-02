@@ -5,10 +5,10 @@
 #include <window.h>
 #include <exception.h>
 
-Window::Window(std::string title, const Vec2<int> position, const Vec2<int> size, Flags flags) : flags{flags} {
-    const auto [x, y] = position;
+Window::Window(std::string title, const Vec2<int> size, Flags flags) : flags{flags} {
     const auto [w, h] = size;
-    window = SDL_CreateWindow(title.c_str(), x, y, w, h);
+
+    window = SDL_CreateWindow(title.c_str(), w, h, buildFlags(flags));
 
     if (!window) throw SDLException(SDL_GetError());
 }

@@ -50,7 +50,7 @@ private:
 
 public:
     Window() = delete; // no default construction
-    Window(std::string title, Vec2<int> position, Vec2<int> size, Flags flags);
+    Window(std::string title, Vec2<int> size, Flags flags);
 
     Window(const Window &) = delete; // no copy construction
     Window(Window &&) noexcept; // no move construction
