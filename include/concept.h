@@ -11,5 +11,4 @@
 template<typename T>
 concept NumericPrimitive = std::same_as<T, int> || std::same_as<T, double> || std::same_as<T, float>;
 
-
 #endif //SDL3_TEMPLATE_PROJECT_CONCEPT_H
