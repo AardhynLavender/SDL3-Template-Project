@@ -75,6 +75,17 @@ public:
 	 }
 
 	 static inline Vec2<int> centered{ SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED };
+	 static inline Vec2<int> undefined{ SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED };
+
+
+	 [[nodiscard]] inline bool isFullscreen() const { return flags.fullscreen; }
+
+	 inline void setFullscreen(bool fullscreen) {
+		 flags.fullscreen = fullscreen;
+		 SDL_SetWindowFullscreen(window, fullscreen ? SDL_TRUE : SDL_FALSE);
+	 }
+
+	 [[nodiscard]] inline bool isFullscreenDesktop() const { return flags.fullscreenDesktop; }
 
 	 [[nodiscard]] Vec2<int> size() const;
 
