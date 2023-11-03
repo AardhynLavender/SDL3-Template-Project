@@ -1,6 +1,8 @@
-/cmake-build-debug/
-/include/SDL3/
-/lib/
+/cmake-build-debug
+/include/SDL3
+/include/SDL3_Mixer
+/lib
+/asset
 
 /CMakeFiles
 CMakeCache.txt

@@ -5,7 +5,10 @@
 #include <application.h>
 
 Application::Application() {
-	handleSDLError(SDL_Init(SDL_INIT_EVERYTHING));
+	handleSDLError(SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO));
+
+	const SDL_AudioSpec spec{ .format = MIX_DEFAULT_FORMAT, .channels = 2, .freq = 44100, };
+	handleSDLError(Mix_OpenAudio(0, &spec));
 }
 
 void Application::run() {
@@ -41,5 +44,6 @@ void Application::render() {
 }
 
 Application::~Application() {
+	Mix_CloseAudio();
 	SDL_Quit();
 }

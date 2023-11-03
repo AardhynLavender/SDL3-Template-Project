@@ -12,5 +12,5 @@ add_executable(SDL3-Template-Project src/main.cpp src/window.cpp src/renderer.cp
 if (APPLE)
     target_link_libraries(SDL3-Template-Project libSDL3.dylib)
 elseif (WIN32)
-    target_link_libraries(SDL3-Template-Project SDL3.lib)
+    target_link_libraries(SDL3-Template-Project SDL3.lib SDL3_Mixer.lib)
 endif ()

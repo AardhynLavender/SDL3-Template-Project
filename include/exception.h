@@ -18,8 +18,10 @@ private:
 	 const char* message;
 };
 
+constexpr auto ERROR_HEADER = "SDL Error: ";
+
 auto handleSDLError(auto errCode) {
-	std::cout << SDL_GetError() << std::endl;
+	std::cout << ERROR_HEADER << SDL_GetError() << std::endl;
 	return errCode;
 }
 

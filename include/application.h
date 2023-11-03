@@ -8,6 +8,8 @@
 #include <renderer.h>
 #include <input.h>
 
+#include <SDL3_Mixer/SDL_mixer.h>
+
 class Application {
 private:
 	 static constexpr auto TITLE = "SDL3 Template Project";
@@ -16,6 +18,8 @@ private:
 				WIN_HEIGHT / 2 - SHAPE_SIZE / 2;
 	 static constexpr auto SPEED = 0.2f;
 	 static constexpr auto FOREVER = true;
+
+	 Mix_Chunk* sound = nullptr;
 
 	 Window window{ TITLE, { WIN_WIDTH, WIN_HEIGHT }, { .opengl = true, }};
 	 Renderer renderer{ window, { .accelerated = true, .vsync = true, }};
