@@ -19,7 +19,21 @@ struct Rec2 final {
 
 	 inline bool operator==(const Rec2<T> &other) const { return position == other.position && size == other.size; }
 
-	 inline bool operator!=(const Rec2<T> &other) const { return !(*this == other); }
+	 inline bool operator!=(const Rec2<T> &other) const { return *this != other; }
+
+	 inline Rec2<T> operator+(const Vec2<T> &other) const { return Rec2<T>{ position + other, size }; }
+
+	 inline Rec2<T> operator-(const Vec2<T> &other) const { return Rec2<T>{ position - other, size }; }
+
+	 inline Rec2<T> &operator+=(const Vec2<T> &other) {
+		 position += other;
+		 return *this;
+	 }
+
+	 inline Rec2<T> &operator-=(const Vec2<T> &other) {
+		 position -= other;
+		 return *this;
+	 }
 
 	 inline bool contains(Vec2<T> point) const { return point < position + size && point > position; }
 
