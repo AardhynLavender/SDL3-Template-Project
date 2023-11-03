@@ -7,7 +7,7 @@ set(CMAKE_SUPPRESS_REGENERATION true) # disable ZERO_CHECK target creation
 include_directories(include)
 link_directories(lib)
 
-add_executable(SDL3-Template-Project src/main.cpp src/window.cpp src/renderer.cpp src/input.cpp)
+add_executable(SDL3-Template-Project src/main.cpp src/window.cpp src/renderer.cpp src/input.cpp src/application.cpp)
 
 if (APPLE)
     target_link_libraries(SDL3-Template-Project libSDL3.dylib)
