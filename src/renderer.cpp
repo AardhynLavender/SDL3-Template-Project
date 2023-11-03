@@ -34,7 +34,7 @@ void Renderer::DrawLine(Vec2<> a, Vec2<> b, Color color) {
 		throw SDLException(SDL_GetError());
 }
 
-void Renderer::DrawRect(Rec2<> rect, const Color color, const Color fill) {
+void Renderer::DrawRect(Rec2<> rect, Color color, Color fill) {
 	// draw the outline
 	if (color.alpha) {
 		SetColor(color);

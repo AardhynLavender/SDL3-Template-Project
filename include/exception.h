@@ -10,18 +10,17 @@
 
 class SDLException final : public std::exception {
 public:
-    SDLException(const char *message) : message(message) {}
+	 SDLException(const char* message) : message(message) {}
 
-    const char *what() const noexcept { return message; }
+	 const char* what() const noexcept { return message; }
 
 private:
-    const char *message;
+	 const char* message;
 };
 
 auto handleSDLError(auto errCode) {
-    std::cout << SDL_GetError() << std::endl;
-    return errCode;
+	std::cout << SDL_GetError() << std::endl;
+	return errCode;
 }
-
 
 #endif //SDL3_TEMPLATE_PROJECT_EXCEPTION_H
