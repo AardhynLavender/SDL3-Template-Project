@@ -4,8 +4,10 @@
 #include <renderer.h>
 #include <input.h>
 
-constexpr int WIN_WIDTH = 800, WIN_HEIGHT = 600;
+constexpr auto WIN_WIDTH = 800, WIN_HEIGHT = 600, SHAPE_SIZE = 50, START_X = WIN_WIDTH / 2 - SHAPE_SIZE / 2, START_Y =
+		  WIN_HEIGHT / 2 - SHAPE_SIZE / 2;
 constexpr auto SPEED = 0.2f;
+constexpr auto FOREVER = true;
 
 int main() {
 	handleSDLError(SDL_Init(SDL_INIT_EVERYTHING));
@@ -14,10 +16,10 @@ int main() {
 	Renderer renderer{ window, { .accelerated = true, .vsync = true, }};
 	Input input{ };
 
-	Vec2<float> pos{ (float) WIN_WIDTH / 2, (float) WIN_HEIGHT / 2 };
-	Rec2<float> rect{ pos, { 50, 50 }};
+	Vec2<float> pos{ START_X, START_Y };
+	Rec2<float> rect{ pos, { SHAPE_SIZE, SHAPE_SIZE }};
 
-	while (1) {
+	while (FOREVER) {
 		input.update();
 		if (input.getQuit())
 			break; // quit
@@ -32,7 +34,7 @@ int main() {
 			rect.position.x += SPEED;
 
 		renderer.Clear();
-		renderer.DrawRect(rect, Colors::white, Colors::transparent);
+		renderer.DrawRect(rect);
 		renderer.Present();
 	}
 
