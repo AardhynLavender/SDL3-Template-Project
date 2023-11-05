@@ -8,7 +8,7 @@
 #include <SDL3_Mixer/SDL_mixer.h>
 #include <exception.h>
 #include <stdexcept>
-#include <iostream>
+#include <output.h>
 #include <filesystem>
 
 enum class SoundType { SOUND_EFFECT, MUSIC };
@@ -57,7 +57,7 @@ public:
 		 else
 			 Mix_FreeMusic(music);
 
-		 std::cout << "sound destroyed" << std::endl;
+		 Out::line("sound destroyed");
 	 }
 
 	 void play(bool loop = false) {

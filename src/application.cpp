@@ -11,7 +11,7 @@ Application::Application() {
 //	music = std::make_unique<Sound<SoundType::MUSIC>>("../asset/sound.mp3");
 //	sfx = std::make_unique<Sound<SoundType::SOUND_EFFECT>>("../asset/sound.wav");
 
-	std::cout << "Application initialized\n";
+	Out::line("Application initialized");
 }
 
 void Application::run() {
@@ -64,5 +64,5 @@ Application::~Application() {
 
 	// <clean up stuff>
 
-	std::cout << "Application destroyed\n";
+	Out::line("Application destroyed");
 }

@@ -9,7 +9,7 @@
 #include <SDL3_Mixer/SDL_mixer.h>
 #include <exception.h>
 #include <stdexcept>
-#include <iostream>
+#include <output.h>
 
 class Video final {
 private:
@@ -17,12 +17,12 @@ private:
 public:
 	 Video() {
 		 SDLException::wrap(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO));
-		 std::cout << "Video initialized\n";
+		 Out::line("Video initialized");
 	 }
 
 	 ~Video() {
 		 SDL_Quit();
-		 std::cout << "Video destroyed\n";
+		 Out::line("Video destroyed");
 	 }
 };
 
@@ -56,13 +56,13 @@ public:
 		 const auto result = Mix_Init(flagsInt);
 		 SDLException::throwIf(result != flagsInt, "Failed to initialize audio: " + std::string{ Mix_GetError() });
 		 SDLException::wrap(Mix_OpenAudio(0, &spec));
-		 std::cout << "Audio initialized\n";
+		 Out::line("Audio initialized");
 	 }
 
 	 ~Audio() {
 		 Mix_CloseAudio();
 		 Mix_Quit();
-		 std::cout << "Audio destroyed\n";
+		 Out::line("Audio destroyed");
 	 }
 };
 

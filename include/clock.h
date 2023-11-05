@@ -6,12 +6,10 @@
 #define SDL3_TEMPLATE_PROJECT_CLOCK_H
 
 #include <chrono>
+#include <concept.h>
 
 namespace Clock {
 	 constexpr auto SECOND_MS = 1000.0f;
-
-	 template<typename T>
-	 concept Numeric = std::is_arithmetic_v<T>;
 
 	 template<Numeric T = float>
 	 class Timer {
