@@ -52,7 +52,7 @@ Open the directory as a Clion project. You'll be prompted to create your *Build 
 
 ## Known Issues
 
-### (**Windows**) `Process finished with exit code -1073741515 (0xC0000135)`
+#### *Windows* `Process finished with exit code -1073741515 (0xC0000135)`
 
 If you get an error like this, It probably means you didn't copy the `*.dll` files into the same directory as the
 executable.
