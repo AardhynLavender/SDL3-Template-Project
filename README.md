@@ -18,7 +18,7 @@ Copy the `include/SDL3` directory from your local **SDL3** repository into `/inc
 
 #### MacOS
 
-Copy `build/libSDL3.dylib` into `/lib`
+Copy *all* `build/*.dylib` files into `/lib`
 
 #### Windows
 
@@ -38,6 +38,8 @@ The headers for **SDL3_Mixer** are included in the **SDL3** repository.
 You'll need to build the library yourself though.
 
 #### MacOS
+
+Copy *all* `build/*.dylib` files into `/lib`
 
 #### Windows
 
