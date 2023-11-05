@@ -10,18 +10,23 @@
 #include <memory>
 #include <sound.h>
 #include <subsystem.h>
-
-#include <SDL3_Mixer/SDL_mixer.h>
+#include <clock.h>
 
 class Application {
 private:
-	 // constants
 	 static constexpr auto TITLE = "SDL3 Template Project";
 	 static constexpr auto WIN_WIDTH = 800, WIN_HEIGHT = 600, SHAPE_SIZE = 50, START_X =
 				WIN_WIDTH / 2 - SHAPE_SIZE / 2, START_Y =
 				WIN_HEIGHT / 2 - SHAPE_SIZE / 2;
-	 static constexpr auto SPEED = 0.2f;
+	 static constexpr auto SPEED = 256.0f;
 	 static constexpr auto FOREVER = true;
+
+	 // timing
+	 static constexpr auto FPS = 60.0f;
+	 static constexpr bool LOG_DELTA = false;
+	 static constexpr auto FRAME_DELAY = Clock::SECOND_MS / FPS;
+	 Clock::Timer<> timer;
+	 float delta;
 
 	 // subsystems (order matters)
 	 Video video{ };

@@ -19,6 +19,11 @@ void Application::run() {
 	// <set up stuff>
 
 	while (FOREVER) {
+		delta = timer.restart();
+
+		if constexpr (LOG_DELTA)
+			std::cout << delta << std::endl;
+
 		events();
 		if (input.getQuit())
 			break; // quit
@@ -37,13 +42,13 @@ void Application::update() {
 	// <update stuff>
 
 	if (input.getKey(SDLK_w))
-		rect.position.y -= SPEED;
+		rect.position.y -= SPEED * delta;
 	if (input.getKey(SDLK_s))
-		rect.position.y += SPEED;
+		rect.position.y += SPEED * delta;
 	if (input.getKey(SDLK_a))
-		rect.position.x -= SPEED;
+		rect.position.x -= SPEED * delta;
 	if (input.getKey(SDLK_d))
-		rect.position.x += SPEED;
+		rect.position.x += SPEED * delta;
 
 //	if (input.getKey(SDLK_SPACE) && !sfx->isPlaying())
 //		sfx->play();
