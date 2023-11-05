@@ -42,8 +42,7 @@ public:
 
 	 inline void Clear() {
 		 ResetColor();
-		 if (SDL_RenderClear(renderer))
-			 throw SDLException(SDL_GetError());
+		 SDLException::wrap(SDL_RenderClear(renderer));
 	 }
 
 	 void DrawLine(Vec2<> a, Vec2<> b, Color color = Colors::white);
@@ -70,8 +69,7 @@ private:
 	 }
 
 	 inline void SetColor(const Color color) {
-		 if (SDL_SetRenderDrawColor(renderer, color.red, color.green, color.blue, color.alpha))
-			 throw SDLException(SDL_GetError());
+		 SDLException::wrap(SDL_SetRenderDrawColor(renderer, color.red, color.green, color.blue, color.alpha));
 	 }
 
 	 inline void ResetColor() { SetColor(Colors::black); }

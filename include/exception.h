@@ -6,23 +6,46 @@
 #define SDL3_TEMPLATE_PROJECT_EXCEPTION_H
 
 #include <SDL3/SDL.h>
+#include <SDL3_mixer/SDL_mixer.h>
 #include <exception>
+#include <string>
+#include <utility>
 
 class SDLException final : public std::exception {
+	 typedef int ErrorCode;
+	 typedef void* AnyPointer;
+	 static constexpr ErrorCode UNKNOWN_ERROR = -1;
+	 ErrorCode code;
+	 std::string message;
 public:
-	 SDLException(const char* message) : message(message) {}
+	 SDLException(std::string message, ErrorCode code) : message{ std::move(message) }, code{ code } {}
 
-	 const char* what() const noexcept { return message; }
+	 explicit SDLException(std::string message) : message{ std::move(message) }, code{ UNKNOWN_ERROR } {}
 
-private:
-	 const char* message;
+	 [[nodiscard]] const char* what() const noexcept override { return message.c_str(); }
+
+	 // wrap functions that return an integral error code
+	 template<bool enabled = true>
+	 inline static ErrorCode wrap(ErrorCode errCode) {
+		 if constexpr (enabled)
+			 if (errCode)
+				 throw SDLException{ SDL_GetError(), errCode };
+		 return errCode;
+	 }
+
+	 inline static void throwIf(bool condition, std::string message = "", ErrorCode code = UNKNOWN_ERROR) {
+		 if (condition)
+			 throw SDLException{ message.size() ? std::move(message) : SDL_GetError(), code };
+	 }
+
+	 // wrap functions that return nullptr to indicate failure
+	 template<bool enabled = true>
+	 inline static auto wrap(auto* pointer) {
+		 if constexpr (enabled)
+			 if (!pointer)
+				 throw SDLException{ SDL_GetError(), UNKNOWN_ERROR };
+		 return pointer;
+	 }
 };
-
-constexpr auto ERROR_HEADER = "SDL Error: ";
-
-auto handleSDLError(auto errCode) {
-	std::cout << ERROR_HEADER << SDL_GetError() << std::endl;
-	return errCode;
-}
 
 #endif //SDL3_TEMPLATE_PROJECT_EXCEPTION_H

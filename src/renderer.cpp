@@ -5,9 +5,7 @@
 #include <renderer.h>
 
 Renderer::Renderer(Window &window, Flags flags, ScaleQuality interpolation) : window{ window }, flags{ flags } {
-	renderer = SDL_CreateRenderer(window.GetWindow(), nullptr, DEFAULT_FLAGS);
-	if (!renderer)
-		throw SDLException(SDL_GetError());
+	renderer = SDLException::wrap(SDL_CreateRenderer(window.GetWindow(), nullptr, DEFAULT_FLAGS));
 
 //    SDL_RenderSetIntegerScale(renderer, SDL_bool::SDL_TRUE);
 //    SetScaleQuality(interpolation);
@@ -30,8 +28,7 @@ Renderer &Renderer::operator=(Renderer &&other) noexcept {
 
 void Renderer::DrawLine(Vec2<> a, Vec2<> b, Color color) {
 	SetColor(color);
-	if (SDL_RenderLine(renderer, a.x, a.y, b.x, b.y))
-		throw SDLException(SDL_GetError());
+	SDLException::wrap(SDL_RenderLine(renderer, a.x, a.y, b.x, b.y));
 }
 
 void Renderer::DrawRect(Rec2<> rect, Color color, Color fill) {
@@ -39,20 +36,17 @@ void Renderer::DrawRect(Rec2<> rect, Color color, Color fill) {
 	if (color.alpha) {
 		SetColor(color);
 		auto r = (SDL_FRect) rect;
-		if (SDL_RenderRect(renderer, &r))
-			throw SDLException(SDL_GetError());
+		SDLException::wrap(SDL_RenderRect(renderer, &r));
 	}
 	// draw the fill
 	if (fill.alpha) {
 		SetColor(fill);
 		const auto r = (SDL_FRect) rect;
-		if (SDL_RenderFillRect(renderer, &r))
-			throw SDLException(SDL_GetError());
+		SDLException::wrap(SDL_RenderFillRect(renderer, &r));
 	}
 }
 
 void Renderer::DrawPixel(Vec2<> vec, Color color) {
 	SetColor(color);
-	if (SDL_RenderPoint(renderer, vec.x, vec.y))
-		throw SDLException(SDL_GetError());
+	SDLException::wrap(SDL_RenderPoint(renderer, vec.x, vec.y));
 }

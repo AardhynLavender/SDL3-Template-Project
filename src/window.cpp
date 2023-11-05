@@ -7,11 +7,7 @@
 
 Window::Window(std::string title, const Vec2<int> size, Flags flags) : flags{ flags } {
 	const auto [w, h] = size;
-
-	window = SDL_CreateWindow(title.c_str(), w, h, buildFlags(flags));
-
-	if (!window)
-		throw SDLException(SDL_GetError());
+	window = SDLException::wrap(SDL_CreateWindow(title.c_str(), w, h, buildFlags(flags)));
 }
 
 Window::Window(Window &&other) noexcept: window{ other.window }, flags{ other.flags } {

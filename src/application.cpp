@@ -5,13 +5,19 @@
 #include <application.h>
 
 Application::Application() {
-	handleSDLError(SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO));
 
-	const SDL_AudioSpec spec{ .format = MIX_DEFAULT_FORMAT, .channels = 2, .freq = 44100, };
-	handleSDLError(Mix_OpenAudio(0, &spec));
+	// <initialize stuff>
+
+//	music = std::make_unique<Sound<SoundType::MUSIC>>("../asset/sound.mp3");
+//	sfx = std::make_unique<Sound<SoundType::SOUND_EFFECT>>("../asset/sound.wav");
+
+	std::cout << "Application initialized\n";
 }
 
 void Application::run() {
+
+	// <set up stuff>
+
 	while (FOREVER) {
 		events();
 		if (input.getQuit())
@@ -27,6 +33,9 @@ void Application::events() {
 }
 
 void Application::update() {
+
+	// <update stuff>
+
 	if (input.getKey(SDLK_w))
 		rect.position.y -= SPEED;
 	if (input.getKey(SDLK_s))
@@ -35,6 +44,9 @@ void Application::update() {
 		rect.position.x -= SPEED;
 	if (input.getKey(SDLK_d))
 		rect.position.x += SPEED;
+
+//	if (input.getKey(SDLK_SPACE) && !sfx->isPlaying())
+//		sfx->play();
 }
 
 void Application::render() {
@@ -44,6 +56,8 @@ void Application::render() {
 }
 
 Application::~Application() {
-	Mix_CloseAudio();
-	SDL_Quit();
+
+	// <clean up stuff>
+
+	std::cout << "Application destroyed\n";
 }
