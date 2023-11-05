@@ -4,8 +4,7 @@ A barebones OS and IDE agnostic C++23 SDL3 CMake project to start your dream sof
 
 ## Setup
 
-Download and build a local copy of **SDL3
-** ([installation instructions](https://github.com/libsdl-org/SDL/blob/main/INSTALL.txt)) and **SDL3_Mixer** (The've no
+Download and build a local copy of **SDL3** ([installation instructions](https://github.com/libsdl-org/SDL/blob/main/INSTALL.txt)) and **SDL3_Mixer** (The've no
 installation instructions, but its near identical to **SDL3**s)
 
 Make a `/lib` and `/include/SDL3` and `/include/SDL3_Mixer` directories in the root of this project.
